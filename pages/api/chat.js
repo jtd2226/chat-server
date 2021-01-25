@@ -27,9 +27,16 @@ function validateQueryParams(query, ...params) {
     );
 }
 
+const projectId = 'codingschool-302721'
+
 const admin = require('firebase-admin')
-if (!admin.apps.length) admin.initializeApp();
-const db = admin.app().database(process.env.FIREBASE_URL)
+if (!admin.apps.length) admin.initializeApp({credential: admin.credential.cert({
+    projectId: projectId,
+    clientEmail: `firebase-adminsdk-4c83t@${projectId}.iam.gserviceaccount.com`,
+    privateKey: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+    databaseURL: process.env.FIREBASE_URL
+})});
+const db = admin.app().database()
 
 const socket = {
     on: name => new Promise((resolve, reject) => 
