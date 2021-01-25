@@ -112,5 +112,5 @@ export default function handler(req, res) {
         ips[user.id] = { ...user, ip: data.ip };
         socket.emit("ip", ips);
     });
-    res.status(200).end("done")
+    return res.status(200).end("done")
 }
