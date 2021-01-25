@@ -87,7 +87,7 @@ const updateUsers = (socket, user) => {
     }
 };
 
-module.exports = (req, res) => {
+export default function handler(req, res) {
     socket.emit("message", messages);
     socket.emit("users", users);
     socket.on("message").then( (msg) => {
